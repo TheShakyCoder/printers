@@ -52,6 +52,7 @@ type Option {
     min_value: Int!
     max_value: Int!
     increment_value: Int!
+    # range: [Int!]!
     input: String!
     products: [Product]! @hasMany
 }

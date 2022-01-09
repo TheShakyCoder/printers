@@ -1,23 +1,26 @@
 <template>
-    <div v-if="cart">
-        <h1>Cart</h1>
+    <div>
+        <h1 class="text-xl font-bold">Your Cart</h1>
         <ul>
-            <li v-for="line in cart">
+            <li v-for="line in cart" class="p-4 shadow border m-4 flex flex-col">
                 <h3>{{ line.product.name }}</h3>
-                <ul>
-                    <li v-for="option in line.options">
+                <ul class="flex flex-wrap">
+                    <li v-for="option in line.options" class="w-40 flex flex-col justify-between">
                         <h5>{{ option.name }}</h5>
-                        <!-- <p v-if="option.input == 'boolean'">
-                            <select name="option.v" :id="'option-' + option.id">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-                        </p>
-                        <p v-else>
-                            <select name="option.v" :id="'option-' + option.id">
-                                <option v-for="i in incrementArray(option.id)" :value="i.value">{{ i.label }}</option>
-                            </select>
-                        </p> -->
+                        <!-- <h6>{{ option.range }}</h6> -->
+                        <div>
+                            <!-- <p v-if="option.input == 'boolean'">
+                                <select name="option.v" :id="'option-' + option.id">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </p> -->
+                            <!-- <p v-else>
+                                <select name="option.v" :id="'option-' + option.id">
+                                    <option v-for="i in incrementArray(option.id)" :value="i.value">{{ i.label }}</option>
+                                </select>
+                            </p> -->
+                        </div>
                     </li>
                 </ul>
             </li>
@@ -42,18 +45,11 @@ export default {
                         input,
                         min_value,
                         max_value,
-                        increment_value
+                        increment_value,
+                        # range
                     }
                 }
-            }`,
-            result ({ data, loading, networkStatus }) {
-                // console.log(data)
-                for(let o = 0; o < data.cart[0].options.length; o++) {
-                    this.options[data.cart[0].options[o].id] = data.cart[0].options[o]
-                }
-                console.log(this.options)
-                return data
-            },
+            }`
         },
     },
 
@@ -66,22 +62,9 @@ export default {
     
 
     methods: {
-        incrementArray(optionId) {
-            const id = parseInt(optionId)
-            // console.log(this.options, id)
-            let result = []
-            for(let i = this.options[id].min_value; i <= this.options[id].max_value; i = i + this.options[id].increment_value) {
-                console.log(i)
-                result.push({
-                    value: i,
-                    label: this.options[id].input === 'minutes' ? this.timeFormat(i) : i
-                })
-            }
-            return result
-        },
-        timeFormat(minutes) {
-            return Math.floor(minutes / 60) + ":" + (minutes % 60).toString().padStart(2, "0")
-        }
+        // timeFormat(minutes) {
+        //     return Math.floor(minutes / 60) + ":" + (minutes % 60).toString().padStart(2, "0")
+        // }
     }
 }
 </script>

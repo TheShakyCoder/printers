@@ -9,6 +9,8 @@ class Option extends Model
 {
     use HasFactory;
 
+    // protected $appends = ['range'];
+
     public function linesOptions()
     {
         return $this->hasMany(LineOption::class, 'lines_options');
@@ -18,4 +20,9 @@ class Option extends Model
     {
         return $this->hasMany(OptionProduct::class, 'options_products');
     }
+
+    // public function getRangeAttribute()
+    // {
+    //     return collect(range($this->min_value, $this->max_value, $this->increment_value));
+    // }
 }

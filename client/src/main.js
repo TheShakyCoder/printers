@@ -1,9 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import './tailwind.css'
 import router from './routes'
 
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 import { createApolloProvider } from '@vue/apollo-option'
+
 
 const cache = new InMemoryCache()
 const apolloClient = new ApolloClient({
